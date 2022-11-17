@@ -17,7 +17,7 @@ class Post(models.Model):
     title = models.CharField(max_length=150, null=True, blank=True)
     content = RichTextUploadingField(null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='media/posts/')
-    slug = models.SlugField(null=True, blank=True)
+    slug = models.SlugField(null=True, blank=True, unique=True)
     views = models.PositiveIntegerField(default=0)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -27,6 +27,38 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class Tutorial(models.Model):
+    name = models.CharField(max_length=150, null=True, blank=True)
+    description = RichTextUploadingField()
+    photo = models.ImageField(null=True, blank=True, upload_to="media/tutorial/")
+    slug = models.SlugField(null=True, blank=True, unique=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-updated_at', 'name']
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class Lesson(models.Model):
+    tutorial = models.ForeignKey(Tutorial, models.PROTECT, related_name='lessons')
+    title = models.CharField(max_length=150, null=True, blank=True)
+    content = RichTextUploadingField(null=True, blank=True)
+    slug = models.SlugField(null=True, blank=True, unique=True)
+    order = models.PositiveIntegerField(null=True, blank=True, unique=True)
+    views = models.PositiveIntegerField(default=0)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', 'title']
+
+    def __str__(self) -> str:
+        return f"{self.tutorial.name}/lesson: {self.order}"
 
 
 class About(models.Model):
