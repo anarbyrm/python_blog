@@ -34,6 +34,7 @@ class Tutorial(models.Model):
     description = RichTextUploadingField()
     photo = models.ImageField(null=True, blank=True, upload_to="media/tutorial/")
     slug = models.SlugField(null=True, blank=True, unique=True)
+    is_active = models.BooleanField(default=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
