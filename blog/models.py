@@ -39,7 +39,7 @@ class Tutorial(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-updated_at', 'name']
+        ordering = ['-updated_at', '-created_at', 'name']
 
     def __str__(self) -> str:
         return self.name
@@ -88,3 +88,16 @@ class Info(models.Model):
     image = models.ImageField(null=True, blank=True, upload_to='media/info/')
     linkedin = models.URLField(null=True, blank=True,)
     resume = models.FileField(null=True, blank=True, upload_to='media/resume/')
+
+    @property
+    def get_full_name(self):
+        return f"{self.name} {self.surname}"
+
+
+class WebsiteSetting(models.Model):
+    site_name = models.CharField(max_length=50, null=True, blank=True)
+    site_title = models.CharField(max_length=200, null=True, blank=True)
+    meta_keywords = models.CharField(max_length=200, null=True, blank=True)
+    meta_description = models.CharField(max_length=600, null=True, blank=True)
+    site_name_footer = models.CharField(max_length=100, null=True, blank=True)
+    footer_caption = models.CharField(max_length=100, null=True, blank=True)

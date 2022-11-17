@@ -3,13 +3,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Bloggy - Personal Blog Template</title>
+        <title>{% if setting.site_title %}{{ setting.site_title }}{% else %}PyBlog{% endif %}</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Free Website Template" name="keywords">
-        <meta content="Free Website Template" name="description">
+        <meta content="{{ setting.meta_keywords }}" name="keywords">
+        <meta content="{{ setting.meta_description }}" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="{% static 'img/favicon.ico' %}" rel="icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap" rel="stylesheet">
@@ -18,18 +18,24 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     </head>
 
     <body>
-        <div class="wrapper">
-            {% include 'partials/info.html' %}
-            <div class="content">
-                {% include 'partials/header.html' %}
-                {% block content %}{% endblock %}
-                {% include 'partials/footer.html' %}
+        {% if request.path == '/about/' %}
+            <div class="wrapper">
+                {% include 'partials/info.html' %}
+        {% else %}
+            <div class="container">
+        {% endif %}
+                <div class="content">
+                    {% include 'partials/header.html' %}
+                    {% block content %}{% endblock %}
+                    {% include 'partials/footer.html' %}
+                </div>
             </div>
-        </div>
+
         {% block js %}{% endblock %}
     </body>
 </html>

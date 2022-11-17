@@ -1,5 +1,12 @@
 from django.urls import path
 
+from . import views
+
 urlpatterns = [
-    # path("", admin.site.urls),
+    path("", views.HomeView.as_view(), name="home-page"),
+    path("about/", views.AboutView.as_view(), name="about-page"),
+    # path("", views.HomeView.as_view(), name="home-page"),
+    # path("", views.HomeView.as_view(), name="home-page"),
+    # path("", views.HomeView.as_view(), name="home-page"),
+    #
 ]
