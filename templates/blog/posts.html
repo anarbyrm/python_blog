@@ -3,25 +3,26 @@
 {% block content %}
         <!-- Blog List Start -->
         <div class="container bg-white pt-5">
-            {% for blog in blogs %}
-                <div class="row blog-item px-3 pb-5">
-                    <div class="col-md-5">
-                        <img class="img-fluid mb-4 mb-md-0" src="{% if blog.image %}{{ blog.image.url }}{% endif %}" alt="Image">
-                    </div>
-                    <div class="col-md-7">
-                        <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">{{ blog.title }}</h3>
-                        <div class="d-flex mb-3">
-                            <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> {{ blog.created_at.date }}</small>
-                            <small class="mr-2 text-muted"><i class="fa fa-folder"></i>{% for tag in blog.tags.all %} {{ tag }} {% endfor %}</small>
-                            <small class="mr-2 text-muted"><i class="fa fa-eye"></i> {{ blog.views }} views </small>
-                        </div>
-                        <p>
-                            {{ blog.content|safe|truncatewords:20 }}
-                        </p>
-                        <a class="btn btn-link p-0" href="{% url 'post-detail-page' slug=blog.slug %}">Read More <i class="fa fa-angle-right"></i></a>
-                    </div>
+            {% for post in posts %}
+            <div class="row blog-item px-3 pb-5">
+                <div class="col-md-5">
+                    <img class="img-fluid mb-4 mb-md-0" src="{% if post.image %}{{ post.image.url }}{% endif %}" alt="Image">
                 </div>
-            {% endfor %}
+                <div class="col-md-7">
+                    <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">{{ post.title }}</h3>
+                    <div class="d-flex mb-3">
+                        <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> {{ post.created_at.date }}</small>
+                        <small class="mr-2 text-muted"><i class="fa fa-folder"></i> {% for tag in post.tags.all %}{% if not forloop.last %} {{ tag.name }},{% else %} {{ tag.name }}{% endif %}{% endfor %}</small>
+                        <small class="mr-2 text-muted"><i class="fa fa-eye"></i> {{ post.views }} views </small>
+                    </div>
+                    <p>
+                        {{ post.content|safe|truncatewords:20 }}
+                        <a class="btn btn-link p-0" href="{% url 'post-detail-page' slug=post.slug %}">Read More <i class="fa fa-angle-right"></i></a>
+                    </p>
+
+                </div>
+            </div>
+        {% endfor %}
 {% endblock %}
 
 {% block js %}

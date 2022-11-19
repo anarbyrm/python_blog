@@ -7,8 +7,8 @@
             <div class="carousel-inner">
                 {% for tutorial in tutorials %}
                     {% if tutorial.is_active %}
-                        <div class="carousel-item active">
-                            <img class="w-100" src="{% if tutorial.photo %}{{ tutorial.photo.url }}{% endif %}" alt="Image" width="600" height="300">
+                        <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
+                            <img class="w-100" src="{% if tutorial.photo %}{{ tutorial.photo.url }}{% endif %}" alt="Image" width="600" height="500">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <h2 class="mb-3 text-white font-weight-bold">{{ tutorial.name }}</h2>
                                 <div class="d-flex text-white">
@@ -50,12 +50,12 @@
                     <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">{{ post.title }}</h3>
                     <div class="d-flex mb-3">
                         <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> {{ post.created_at.date }}</small>
-                        <small class="mr-2 text-muted"><i class="fa fa-folder"></i> {{ post.topic.name }}</small>
+                        <small class="mr-2 text-muted"><i class="fa fa-folder"></i> {% for tag in post.tags.all %}{% if not forloop.last %} {{ tag.name }},{% else %} {{ tag.name }}{% endif %}{% endfor %}</small>
                         <small class="mr-2 text-muted"><i class="fa fa-eye"></i> {{ post.views }} views </small>
                     </div>
                     <p>
                         {{ post.content|safe|truncatewords:20 }}
-                        <a class="btn btn-link p-0" href="">Read More <i class="fa fa-angle-right"></i></a>
+                        <a class="btn btn-link p-0" href="{% url 'post-detail-page' slug=post.slug %}">Read More <i class="fa fa-angle-right"></i></a>
                     </p>
 
                 </div>

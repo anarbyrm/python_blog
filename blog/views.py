@@ -37,11 +37,11 @@ class ContactView(CreateView):
 class PostListView(ListView):
     model = models.Post
     template_name = 'blog/posts.html'
-    context_object_name = 'blogs'
+    context_object_name = 'posts'
 
 
 class PostDetailView(DetailView):
     model = models.Post
     template_name = 'blog/post-detail.html'
-    context_object_name = 'blog'
+    context_object_name = 'post'
 
