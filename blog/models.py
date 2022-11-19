@@ -2,7 +2,7 @@ from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
-class Topic(models.Model):
+class Tag(models.Model):
     name = models.CharField(max_length=150)
 
     class Meta:
@@ -13,7 +13,7 @@ class Topic(models.Model):
     
 
 class Post(models.Model):
-    topic = models.ForeignKey(Topic, models.PROTECT, related_name='posts')
+    tags = models.ManyToManyField(Tag)
     title = models.CharField(max_length=150, null=True, blank=True)
     content = RichTextUploadingField(null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='posts/')
