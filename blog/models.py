@@ -16,7 +16,7 @@ class Post(models.Model):
     topic = models.ForeignKey(Topic, models.PROTECT, related_name='posts')
     title = models.CharField(max_length=150, null=True, blank=True)
     content = RichTextUploadingField(null=True, blank=True)
-    image = models.ImageField(null=True, blank=True, upload_to='media/posts/')
+    image = models.ImageField(null=True, blank=True, upload_to='posts/')
     slug = models.SlugField(null=True, blank=True, unique=True)
     views = models.PositiveIntegerField(default=0)
     updated_at = models.DateTimeField(auto_now=True)
@@ -32,7 +32,7 @@ class Post(models.Model):
 class Tutorial(models.Model):
     name = models.CharField(max_length=150, null=True, blank=True)
     description = RichTextUploadingField()
-    photo = models.ImageField(null=True, blank=True, upload_to="media/tutorial/")
+    photo = models.ImageField(null=True, blank=True, upload_to="tutorial/")
     slug = models.SlugField(null=True, blank=True, unique=True)
     is_active = models.BooleanField(default=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -85,9 +85,9 @@ class Info(models.Model):
     name = models.CharField(max_length=150, null=True, blank=True)
     surname = models.CharField(max_length=150, null=True, blank=True)
     bio = RichTextUploadingField(null=True, blank=True,)
-    image = models.ImageField(null=True, blank=True, upload_to='media/info/')
+    image = models.ImageField(null=True, blank=True, upload_to='info/')
     linkedin = models.URLField(null=True, blank=True,)
-    resume = models.FileField(null=True, blank=True, upload_to='media/resume/')
+    resume = models.FileField(null=True, blank=True, upload_to='resume/')
 
     @property
     def get_full_name(self):
