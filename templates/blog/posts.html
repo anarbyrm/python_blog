@@ -1,0 +1,41 @@
+{% extends 'partials/base.html'%}
+{% load static %}
+{% block content %}
+        <!-- Blog List Start -->
+        <div class="container bg-white pt-5">
+            {% for blog in blogs %}
+                <div class="row blog-item px-3 pb-5">
+                    <div class="col-md-5">
+                        <img class="img-fluid mb-4 mb-md-0" src="{% if blog.image %}{{ blog.image.url }}{% endif %}" alt="Image">
+                    </div>
+                    <div class="col-md-7">
+                        <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">{{ blog.title }}</h3>
+                        <div class="d-flex mb-3">
+                            <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> {{ blog.created_at.date }}</small>
+                            <small class="mr-2 text-muted"><i class="fa fa-folder"></i> {{ blog.topic }}</small>
+                            <small class="mr-2 text-muted"><i class="fa fa-eye"></i> {{ blog.views }} views </small>
+                        </div>
+                        <p>
+                            {{ blog.content|safe|truncatewords:20 }}
+                        </p>
+                        <a class="btn btn-link p-0" href="{% url 'post-detail-page' slug=blog.slug %}">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+{% endblock %}
+
+{% block js %}
+
+        <!-- Back to Top -->
+        <a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+
+
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+{% endblock %}

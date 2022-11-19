@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic.base import View
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView, DetailView
 from django.contrib import messages
 
 from . import models, forms
@@ -34,4 +34,14 @@ class ContactView(CreateView):
         return redirect(reverse('home-page'))
 
 
+class PostListView(ListView):
+    model = models.Post
+    template_name = 'blog/posts.html'
+    context_object_name = 'blogs'
+
+
+class PostDetailView(DetailView):
+    model = models.Post
+    template_name = 'blog/post-detail.html'
+    context_object_name = 'blog'
 

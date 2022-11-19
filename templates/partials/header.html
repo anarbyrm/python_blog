@@ -12,10 +12,10 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav m-auto">
                 <a href="{% url 'home-page' %}" class="nav-item nav-link active">Ana Səhifə</a>
-                <a href="" class="nav-item nav-link active">Blog</a>
+                <a href="{% url 'post-list-page' %}" class="nav-item nav-link active">Blog</a>
                 <a href="" class="nav-item nav-link active">Qısa Dərslər</a>
                 <a href="{% url 'about-page' %}" class="nav-item nav-link active">Haqqımızda</a>
-                <a href="" class="nav-item nav-link active">Əlaqə</a>
+                <a href="{% url 'contact-page' %}" class="nav-item nav-link active">Əlaqə</a>
             </div>
         </div>
     </nav>
