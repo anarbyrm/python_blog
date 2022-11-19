@@ -16,17 +16,17 @@
     <div class="container py-5 px-2 bg-white">
         <div class="row px-4">
             <div class="col-12">
-                <img class="img-fluid mb-4" src="{% if post.image %}{{ post.image.url }}{% endif %}" alt="Image">
+                <img class="mb-4" src="{% if post.image %}{{ post.image.url }}{% endif %}" height="500px" width="1050px" alt="Image">
                 <h2 class="mb-3 font-weight-bold">{{ post.title }}</h2>
                 <div class="d-flex">
                     <p class="mr-3 text-muted"><i class="fa fa-calendar-alt"></i> {{ post.created_at.date }}</p>
-                    <p class="mr-3 text-muted"><i class="fa fa-comments"></i> 15 Comments</p>
+                    <p class="mr-3 text-muted"><i class="fa fa-eye"></i> {{ view_count }} views</p>
                 </div>
                 <p class="post-content" >
                     {{ post.content|safe }}
                 </p>
             </div>
-            <div class="col-12 py-4">
+            <div class="col-12 py-4">  
                 {% for tag in post.tags.all %}
                     <a href="" class="btn btn-sm btn-outline-primary mb-1">{{ tag.name }}</a>
                 {% endfor %}

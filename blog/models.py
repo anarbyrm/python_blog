@@ -18,12 +18,12 @@ class Post(models.Model):
     content = RichTextUploadingField(null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='posts/')
     slug = models.SlugField(null=True, blank=True, unique=True)
-    views = models.PositiveIntegerField(default=0)
+    views = models.ManyToManyField('blog.IPModel', blank=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-updated_at', 'title', 'views']
+        ordering = ['-updated_at', 'title']
 
     def __str__(self) -> str:
         return self.title
@@ -51,7 +51,7 @@ class Lesson(models.Model):
     content = RichTextUploadingField(null=True, blank=True)
     slug = models.SlugField(null=True, blank=True, unique=True)
     order = models.PositiveIntegerField(null=True, blank=True, unique=True)
-    views = models.PositiveIntegerField(default=0)
+    views = models.ManyToManyField('blog.IPModel', blank=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -101,3 +101,12 @@ class WebsiteSetting(models.Model):
     meta_description = models.CharField(max_length=600, null=True, blank=True)
     site_name_footer = models.CharField(max_length=100, null=True, blank=True)
     footer_caption = models.CharField(max_length=100, null=True, blank=True)
+
+
+class IPModel(models.Model):
+    address = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return self.address
+
+
