@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic.base import View
+from django.views.generic import CreateView
+from django.contrib import messages
 
-from . import models
+from . import models, forms
 
 
 class HomeView(View):
@@ -20,6 +22,16 @@ class AboutView(View):
 
         return render(request, 'blog/about.html', context)
 
+
+class ContactView(CreateView):
+    model = models.Contact
+    form_class = forms.ContactForm
+    template_name = 'blog/contact.html'
+
+    def form_valid(self, form):
+        form = form.save()
+        messages.success(self.request, f"{form.full_name}, mesajınız bizə göndərildi.")
+        return redirect(reverse('home-page'))
 
 
 
