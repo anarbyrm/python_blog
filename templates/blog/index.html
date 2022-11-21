@@ -14,7 +14,7 @@
                                 <div class="d-flex text-white">
                                     <small class="mr-2"><i class="fa fa-calendar-alt"></i> {{ tutorial.created_at.date }}</small>
                                 </div>
-                                <a href="" class="btn btn-lg btn-outline-light mt-4">Read More</a>
+                                <a href="{% url 'tutorial-detail-page' slug=tutorial.slug %}" class="btn btn-lg btn-outline-light mt-4">Read More</a>
                             </div>
                         </div>
                     {% endif %}

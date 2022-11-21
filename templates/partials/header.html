@@ -2,7 +2,7 @@
 <!-- Navbar Start -->
 <div class="container p-0">
     <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
-        <i class="fab fa-python ml-3" style="font-size:40px;color:white"></i>
+        <a href="{% url 'home-page' %}" ><i class="fab fa-python ml-3" style="font-size:40px;color:white"></i></a>
         <a href="{% url 'home-page' %}" class="navbar-brand d-block d-lg-none">
             {{ setting.site_name }}
         </a>
@@ -13,7 +13,7 @@
             <div class="navbar-nav m-auto">
                 <a href="{% url 'home-page' %}" class="nav-item nav-link active">Ana Səhifə</a>
                 <a href="{% url 'post-list-page' %}" class="nav-item nav-link active">Blog</a>
-                <a href="" class="nav-item nav-link active">Qısa Dərslər</a>
+                <a href="{% url 'tutorial-list-page' %}" class="nav-item nav-link active">Qısa Dərslər</a>
                 <a href="{% url 'about-page' %}" class="nav-item nav-link active">Haqqımızda</a>
                 <a href="{% url 'contact-page' %}" class="nav-item nav-link active">Əlaqə</a>
             </div>

@@ -75,3 +75,45 @@ class PostDetailView(DetailView):
         context['view_count'] = obj.views.count()
 
         return render(self.request, 'blog/post-detail.html', context)
+
+
+class TutorialListView(ListView):
+    model = models.Tutorial
+    template_name = 'blog/tutorials-list.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(TutorialListView, self).get_context_data(**kwargs)
+        context['tutorials'] = models.Tutorial.objects.filter(is_active=True)
+        return context
+
+
+class TutorialDetailView(DetailView):
+    model = models.Tutorial
+    template_name = 'blog/tutorial-detail.html'
+
+    def get_object(self):
+        slug = self.kwargs.get('slug')
+        obj = get_object_or_404(models.Tutorial, slug=slug)
+        return obj
+
+    def get_context_data(self, **kwargs):
+        context = super(TutorialDetailView, self).get_context_data(**kwargs)
+        context['tutorial'] = self.get_object()
+        context['lessons'] = self.get_object().lessons.all()
+        return context
+
+
+class LessonDetailView(DetailView):
+    model = models.Lesson
+    template_name = 'blog/lesson-detail.html'
+
+    def get_object(self):
+        slug = self.kwargs.get('slug')
+        obj = get_object_or_404(models.Lesson, slug=slug)
+        return obj
+
+    def get_context_data(self, **kwargs):
+        context = super(LessonDetailView, self).get_context_data(**kwargs)
+        context['lesson'] = self.get_object()
+        return context
+
