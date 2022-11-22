@@ -1,0 +1,17 @@
+{% load static %}
+<div class="sidebar">
+    <div class="sidebar-text d-flex flex-column justify-content-center text-center">
+        <div>
+            <h3 class="font-weight-bold mt-5 mr-3">Mövzular</h3>
+            <hr>
+            <div>
+                {% for tag in tags %}
+                    <a href="{% url 'post-list-page' %}?tag={{ tag.name }}" class="btn btn-sm btn-outline-primary mb-1">{{ tag.name }} ({{ tag.post_set.count }})</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-icon d-flex flex-column h-100 justify-content-center text-right">
+        <i class="fas fa-2x fa-angle-double-right text-primary"></i>
+    </div>
+</div>
