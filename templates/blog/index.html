@@ -29,8 +29,7 @@
         </div>
     </div>
     <!-- Carousel End -->
-    
-    
+
     <!-- Blog List Start -->
     <div class="container bg-white pt-5">
         {% if messages %}
@@ -40,6 +39,13 @@
                 </div>
             {% endfor %}
         {% endif %}
+        
+        <!-- Search input -->
+        <form method="get" action="{% url "post-list-page" %}">
+            <div class='d-flex justify-content-center'>
+                <input class="form-control mb-5 ml-5 mr-5" placeholder="Axtarmaq istədiyiniz məqaləni və ya dərsi yazın..." name="q"/>
+            </div>
+        </form>
 
         {% for post in posts %}
             <div class="row blog-item px-3 pb-5">
@@ -50,7 +56,7 @@
                     <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">{{ post.title }}</h3>
                     <div class="d-flex mb-3">
                         <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> {{ post.created_at.date }}</small>
-                        <small class="mr-2 text-muted"><i class="fa fa-folder"></i> {% for tag in post.tags.all %}{% if not forloop.last %} {{ tag.name }},{% else %} {{ tag.name }}{% endif %}{% endfor %}</small>
+                        <small class="mr-2 text-muted"><i class="fa fa-folder"></i> {% for tag in post.tags.all %}{% if not forloop.last %} <a href="{% url 'post-list-page' %}?tag={{ tag.name }}"> {{ tag.name }}</a>,{% else %} <a href="{% url 'post-list-page' %}?tag={{ tag.name }}"> {{ tag.name }}</a>{% endif %}{% endfor %}</small>
                         <small class="mr-2 text-muted"><i class="fa fa-eye"></i> {{ post.views.count }} görülmə </small>
                     </div>
                     <p>
@@ -66,6 +72,12 @@
                     <a class="btn btn-lg btn-outline-primary mb-5" href="{% url 'post-list-page' %}">Bütün məqalələr <i class="fa fa-angle-right"></i></a>
                 </div>
             {% endif %}
+        {% empty %}
+            <div class="row blog-item px-3 pb-5">
+                <div class="col-md-5">
+                    <h3>Post yoxdur...</h3>
+                </div>
+            </div>
         {% endfor %}
     </div>
     <!-- Blog List End -->

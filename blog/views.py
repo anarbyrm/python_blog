@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic.base import View
 from django.views.generic import CreateView, ListView, DetailView
 from django.contrib import messages
+from django.db.models import Q
 
 from . import models, forms
 
@@ -15,13 +16,13 @@ def get_client_ip(request):
     return request.META.get('REMOTE_ADDR') 
 
 
-
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         context = dict()
         context['tutorials'] = models.Tutorial.objects.all()[:3]
-        context['posts'] = models.Post.objects.all()[:6]
+        posts = models.Post.objects.all()[:6]
 
+        context['posts'] = posts
         return render(request, 'blog/index.html', context)
 
 
@@ -49,6 +50,23 @@ class PostListView(ListView):
     template_name = 'blog/posts.html'
     context_object_name = 'posts'
 
+    def get_queryset(self):
+        posts = models.Post.objects.all()
+
+        q = self.request.GET.get('q')
+        tag = self.request.GET.get('tag')
+
+        if q is not None:
+            posts = models.Post.objects.filter(
+                Q(title__icontains=q) |
+                Q(content__icontains=q) |
+                Q(tags__name__icontains=q)
+            )
+
+        if tag is not None:
+            posts = models.Post.objects.filter(tags__name__icontains=tag)
+
+        return posts
 
 class PostDetailView(DetailView):
     model = models.Post
