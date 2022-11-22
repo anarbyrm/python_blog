@@ -105,15 +105,29 @@ class TutorialDetailView(DetailView):
 
 class LessonDetailView(DetailView):
     model = models.Lesson
-    template_name = 'blog/lesson-detail.html'
+
+    def get(self, *args, **kwargs):
+        context = dict()
+        user_ip = get_client_ip(self.request)
+
+        if not models.IPModel.objects.filter(address=user_ip).exists():
+            ip = models.IPModel.objects.create(address=user_ip)
+            ip.save()
+        else:
+            ip = models.IPModel.objects.filter(address=user_ip).first()
+
+        obj = self.get_object()
+
+        if not ip in obj.views.all():
+            obj.views.add(ip)
+
+        context['lesson'] = obj
+
+        return render(self.request, 'blog/lesson-detail.html', context)
 
     def get_object(self):
         slug = self.kwargs.get('slug')
         obj = get_object_or_404(models.Lesson, slug=slug)
         return obj
 
-    def get_context_data(self, **kwargs):
-        context = super(LessonDetailView, self).get_context_data(**kwargs)
-        context['lesson'] = self.get_object()
-        return context
 
