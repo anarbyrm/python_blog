@@ -5,7 +5,7 @@
             <h3 class="font-weight-bold mt-5 mr-3">Mövzular</h3>
             <hr>
             <div>
-                <a href="% url 'post-list-page' %}" class="btn btn-sm btn-outline-primary mb-1">Hamısı ({{ all_posts_count }})</a>
+                <a href="{% url 'post-list-page' %}" class="btn btn-sm btn-outline-primary mb-1">Hamısı ({{ all_posts_count }})</a>
                 {% for tag in tags %}
                     <a href="{% url 'post-list-page' %}?tag={{ tag.name }}" class="btn btn-sm btn-outline-primary mb-1">{{ tag.name }} ({{ tag.post_set.count }})</a>
                 {% endfor %}

@@ -28,11 +28,13 @@
                 <div class="content">
                     {% include 'partials/header.html' %}
                     {% block content %}{% endblock %}
-                    {% include 'partials/footer.html' %}
                 </div>
             </div>
 
         {% block js %}{% endblock %}
     </body>
+    <footer>
+        {% include 'partials/footer.html' %}
+    </footer>
 </html>
     

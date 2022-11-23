@@ -20,41 +20,43 @@
                 <p>anar.bayram@yahoo.com</p>
             </div>
         </div>
-        <div class="col-md-12 pb-1">
-            <div class="contact-form m-5">
-                <form method='post' name="sentMessage">
-                    {% csrf_token %}
+        <div class="row px-3 pb-2">
+            <div class="col-md-12 pb-1">
+                <div class="contact-form m-5">
+                    <form method='post' name="sentMessage">
+                        {% csrf_token %}
 
-                    {% for field in form %}
+                        {% for field in form %}
+                            <div>
+                                {% if field.name == 'full_name' %}
+                                    {{ field }}
+                                {% endif %}
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div>
+                                {% if field.name == 'email' %}
+                                    {{ field }}
+                                {% endif %}
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div>
+                                {% if field.name == 'subject' %}
+                                    {{ field }}
+                                {% endif %}
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div>
+                                {% if field.name == 'content' %}
+                                    {{ field }}
+                                {% endif %}
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        {% endfor %}
                         <div>
-                            {% if field.name == 'full_name' %}
-                                {{ field }}
-                            {% endif %}
-                            <p class="help-block text-danger"></p>
+                            <button class="btn btn-primary" type="submit">Göndər</button>
                         </div>
-                        <div>
-                            {% if field.name == 'email' %}
-                                {{ field }}
-                            {% endif %}
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div>
-                            {% if field.name == 'subject' %}
-                                {{ field }}
-                            {% endif %}
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div>
-                            {% if field.name == 'content' %}
-                                {{ field }}
-                            {% endif %}
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    {% endfor %}
-                    <div>
-                        <button class="btn btn-primary" type="submit">Göndər</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
