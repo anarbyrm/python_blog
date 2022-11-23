@@ -23,15 +23,8 @@
     </head>
 
     <body>
-        {% if request.path == '/about/' %}
-            <div class="wrapper">
-                {% include 'partials/info.html' %}
-        {% elif request.path == '/posts/' %}
-            <div class="wrapper">
-                {% include 'partials/filters.html' %}
-        {% else %}
+
             <div class="container">
-        {% endif %}
                 <div class="content">
                     {% include 'partials/header.html' %}
                     {% block content %}{% endblock %}

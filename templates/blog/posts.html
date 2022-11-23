@@ -1,14 +1,22 @@
 {% extends 'partials/base.html'%}
 {% load static %}
 {% block content %}
-        <!-- Blog List Start -->
-        <div class="container bg-white pt-5">
+<div class="d-flex justify-content-center bg-white">
+    <div class="pl-3 pr-3">
+        <div class="row col-8 center pt-5">
+            <form method="get">
+                <div class='d-flex justify-content-center'>
+                    <input class="form-control mb-5 ml-5 mr-5" placeholder="Axtarmaq istədiyiniz məqaləni və ya dərsi yazın..." name="q"/>
+                </div>
+            </form>
+        </div>
 
-        <form method="get">
-            <div class='d-flex justify-content-center'>
-                <input class="form-control mb-5 ml-5 mr-5" placeholder="Axtarmaq istədiyiniz məqaləni və ya dərsi yazın..." name="q"/>
-            </div>
-        </form>
+    <div class="row">
+        <!-- Blog List Start -->
+        <div class="container bg-white col-3 position-fixed pr-5">
+            {% include 'partials/filters.html' %}
+        </div>
+        <div class="container bg-white pt-5 col-7">
 
             {% for post in posts %}
             <div class="row blog-item px-3 pb-5">
@@ -37,6 +45,9 @@
                 </div>
             </div>
         {% endfor %}
+    </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}

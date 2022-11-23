@@ -2,13 +2,13 @@
 {% load static %}
 {% block content %}  
     <!-- Carousel Start -->
-    <div class="container p-0">
+    <div class="container p-0 col-8">
         <div id="blog-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 {% for tutorial in tutorials %}
                     {% if tutorial.is_active %}
                         <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
-                            <img class="w-100" src="{% if tutorial.photo %}{{ tutorial.photo.url }}{% endif %}" alt="Image" width="600" height="500">
+                            <img class="w-100" src="{% if tutorial.photo %}{{ tutorial.photo.url }}{% endif %}" alt="Image" height="400">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <h2 class="mb-3 text-white font-weight-bold">{{ tutorial.name }}</h2>
                                 <div class="d-flex text-white">
@@ -31,7 +31,7 @@
     <!-- Carousel End -->
 
     <!-- Blog List Start -->
-    <div class="container bg-white pt-5">
+    <div class="container bg-white pt-5 col-8">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
