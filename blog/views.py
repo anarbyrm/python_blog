@@ -43,6 +43,9 @@ class ContactView(CreateView):
         form = form.save()
         messages.success(self.request, f"{form.full_name}, mesajınız bizə göndərildi.")
         return redirect(reverse('home-page'))
+    
+    def form_invalid(self, form):
+        return super(ContactView, self).form_invalid(form)
 
 
 class PostListView(ListView):

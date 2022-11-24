@@ -32,13 +32,6 @@
 
     <!-- Blog List Start -->
     <div class="container bg-white pt-5 col-8">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    {{ message|safe }}
-                </div>
-            {% endfor %}
-        {% endif %}
         
         <!-- Search input -->
         <form method="get" action="{% url "post-list-page" %}">
@@ -46,6 +39,16 @@
                 <input class="form-control mb-5 ml-5 mr-5" placeholder="Axtarmaq istədiyiniz məqaləni və ya dərsi yazın..." name="q"/>
             </div>
         </form>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message|safe }}
+                </div>
+                <br><br>
+            {% endfor %}
+        {% endif %}
+
 
         {% for post in posts %}
             <div class="row blog-item px-3 pb-5">
