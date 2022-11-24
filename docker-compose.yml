@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: postgres_db
+    image: postgres
+    restart: "always"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdb:/var/lib/postgresql/data
+    env_file: .env
+    environment:
+      - LC_ALL=C.UTF-8
+
+  django_gunicorn:
+    volumes:
+      - static:/static
+      - .:/code
+    env_file:
+      - .env
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - django_gunicorn
+
+volumes:
+  static:
