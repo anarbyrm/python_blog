@@ -2,28 +2,30 @@
 {% load static %}
 {% block content %} 
     <!-- Contact Start -->
-    <div class="container bg-white pt-5">
-        <div class="row px-3 pb-2">
-            <div class="col-sm-4 text-center mb-1">
+    <div class="container bg-white pt-5 col-8" style="place-items: center">
+        <div class="row d-flex justify-content-center">
+            <div class="col-3 text-center mb-1">
                 <i class="fa fa-2x fa-map-marker-alt mb-3 text-primary"></i>
                 <h4 class="font-weight-bold">Ünvan</h4>
                 <p>Quba, Azərbaycan</p>
             </div>
-            <div class="col-sm-4 text-center mb-1">
+            <div class="col-3 text-center mb-1">
                 <i class="fa fa-2x fa-phone-alt mb-3 text-primary"></i>
                 <h4 class="font-weight-bold">Nömrə</h4>
                 <p>+994 77 535 00 95</p>
             </div>
-            <div class="col-sm-4 text-center mb-1">
+            <div class="col-3 text-center mb-1">
                 <i class="far fa-2x fa-envelope mb-3 text-primary"></i>
                 <h4 class="font-weight-bold">Email</h4>
                 <p>anar.bayram@yahoo.com</p>
             </div>
         </div>
-        <div class="row px-3 pb-2">
-            <div class="col-md-12 pb-1">
+
+        <div class="d-flex justify-content-center row px-3 pb-2 ">
+            <div class="col-7 text-center pb-1 border border-info rounded">
                 <div class="contact-form m-5">
                     <form method='post' name="sentMessage">
+                        <label class="mb-5"><h2>Əlaqə</h2></label>
                         {% csrf_token %}
 
                         {% for field in form %}

@@ -5,11 +5,11 @@
 
 {% if about %}
     <!-- About Start -->
-    <div class="container bg-white pt-5">
-        <div class="row px-3 pb-5">
-            <div class="col-md-12">
-                <h2 class="mb-4 font-weight-bold">{{ about.title }}</h2>
-                <p class="m-0">
+    <div class="container text-center bg-white pt-5">
+        <div class="d-inline-block center row px-3 pb-5 col-6">
+            <div class="border border-info rounded" style="place-items: center">
+                <h2 class="text-center mb-4 font-weight-bold m-3">{{ about.title }}</h2>
+                <p class="text-center m-3">
                     {{ about.content|safe }}
                 </p>
             </div>
