@@ -532,35 +532,35 @@ pre code {
   overflow-y: scroll;
 }
 
-/*.container,*/
-/*.container-fluid,*/
-/*.container-xl,*/
-/*.container-lg,*/
-/*.container-md,*/
-/*.container-sm {*/
-/*  width: 100%;*/
-/*  padding-right: 15px;*/
-/*  padding-left: 15px;*/
-/*  margin-right: auto;*/
-/*  margin-left: auto;*/
-/*}*/
+.container,
+.container-fluid,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
 
-/*@media (min-width: 1500px) {*/
+/*@media (min-width: 576px) {*/
 /*  .container-sm, .container {*/
 /*    max-width: 1500px;*/
 /*  }*/
 /*}*/
-/*@media (min-width: 1500px) {*/
+/*@media (min-width: 768px) {*/
 /*  .container-md, .container-sm, .container {*/
 /*    max-width: 1500px;*/
 /*  }*/
 /*}*/
-/*@media (min-width: 1500px) {*/
+/*@media (min-width: 992px) {*/
 /*  .container-lg, .container-md, .container-sm, .container {*/
 /*    max-width: 1500px;*/
 /*  }*/
 /*}*/
-/*@media (min-width: 1500px) {*/
+/*@media (min-width: 1200px) {*/
 /*  .container-xl, .container-lg, .container-md, .container-sm, .container {*/
 /*    max-width: 1500px;*/
 /*  }*/
@@ -7258,6 +7258,12 @@ button.bg-dark:focus {
 .mr-4,
 .mx-4 {
   margin-right: 1.5rem !important;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mb-4,
