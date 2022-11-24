@@ -63,6 +63,31 @@
                 </div>
             </div>
         {% endfor %}
+
+        {% if page_obj.number != page_obj.paginator.num_pages %}
+            <div class="col-12 py-4">
+                <div class="btn-group btn-group-lg w-100">
+
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary"><i class="fa fa-angle-left mr-2"></i>Öncəki</a>
+                    {% else %}
+                        <a href="#" class="btn btn-outline-primary disabled"><i class="fa fa-angle-left mr-2"></i>Öncəki</a>
+                    {% endif %}
+
+
+                        <h3 class="ml-5 mr-5">Səhifə: {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</h3>
+
+
+                    {% if page_obj.has_next %}
+                        <a class="btn btn-outline-primary" href="?page={{ page_obj.next_page_number }}">Sonrakı<i class="fa fa-angle-right ml-2"></i></a>
+                    {% else %}
+                        <a class="btn btn-outline-primary disabled" href="#">Sonrakı<i class="fa fa-angle-right ml-2"></i></a>
+                    {% endif %}
+
+                </div>
+            </div>
+        {% endif %}
+
     </div>
     </div>
 </div>

@@ -52,6 +52,7 @@ class PostListView(ListView):
     model = models.Post
     template_name = 'blog/posts.html'
     context_object_name = 'posts'
+    paginate_by = 8
 
     def get_queryset(self):
         posts = models.Post.objects.all()
@@ -102,11 +103,12 @@ class PostDetailView(DetailView):
 class TutorialListView(ListView):
     model = models.Tutorial
     template_name = 'blog/tutorials-list.html'
+    context_object_name = 'tutorials'
+    paginate_by = 4
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(TutorialListView, self).get_context_data(**kwargs)
-        context['tutorials'] = models.Tutorial.objects.filter(is_active=True)
-        return context
+    def get_queryset(self):
+        queryset = models.Tutorial.objects.filter(is_active=True)
+        return queryset
 
 
 class TutorialDetailView(DetailView):

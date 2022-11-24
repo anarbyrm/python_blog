@@ -1,28 +1,55 @@
 {% extends 'partials/base.html'%}
 {% load static %}
 {% block content %}
+    <div>
         <!-- Blog List Start -->
         <div class="container col-10 bg-white pt-5">
             {% for tutorial in tutorials %}
-            <div class="row blog-item px-3 pb-5">
-                <div class="col-md-5">
-                    <img class="mb-4 mb-md-0" src="{% if tutorial.photo %}{{ tutorial.photo.url }}{% endif %}" height="230px" width="400px" alt="Image">
-                </div>
-                <div class="col-md-7">
-                    <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">{{ tutorial.name }}</h3>
-                    <div class="d-flex mb-3">
-                        <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> {{ tutorial.created_at.date }}</small>
-                        <small class="mr-2 text-muted"><i class="fa fa-folder"></i> {{ tutorial.lessons.count }} dərs</small>
+                <div class="row blog-item px-3 pb-5">
+                    <div class="col-md-5">
+                        <img class="mb-4 mb-md-0" src="{% if tutorial.photo %}{{ tutorial.photo.url }}{% endif %}" height="230px" width="400px" alt="Image">
+                    </div>
+                    <div class="col-md-7">
+                        <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">{{ tutorial.name }}</h3>
+                        <div class="d-flex mb-3">
+                            <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> {{ tutorial.created_at.date }}</small>
+                            <small class="mr-2 text-muted"><i class="fa fa-folder"></i> {{ tutorial.lessons.count }} dərs</small>
+
+                        </div>
+                        <p>
+                            {{ tutorial.description|safe|truncatewords:20 }}
+                            <a class="btn btn-link p-0" href="{% url 'tutorial-detail-page' slug=tutorial.slug %}">Daha ətraflı <i class="fa fa-angle-right"></i></a>
+                        </p>
 
                     </div>
-                    <p>
-                        {{ tutorial.description|safe|truncatewords:20 }}
-                        <a class="btn btn-link p-0" href="{% url 'tutorial-detail-page' slug=tutorial.slug %}">Daha ətraflı <i class="fa fa-angle-right"></i></a>
-                    </p>
+                </div>
+            {% endfor %}
+
+        {% if page_obj.paginator.num_pages != 1 %}
+            <div class="col-12 py-4">
+                <div class="btn-group btn-group-lg w-100">
+
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary"><i class="fa fa-angle-left mr-2"></i>Öncəki</a>
+                    {% else %}
+                        <a href="#" class="btn btn-outline-primary disabled"><i class="fa fa-angle-left mr-2"></i>Öncəki</a>
+                    {% endif %}
+
+
+                        <h3 class="ml-5 mr-5">Səhifə: {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</h3>
+
+
+                    {% if page_obj.has_next %}
+                        <a class="btn btn-outline-primary" href="?page={{ page_obj.next_page_number }}">Sonrakı<i class="fa fa-angle-right ml-2"></i></a>
+                    {% else %}
+                        <a class="btn btn-outline-primary disabled" href="#">Sonrakı<i class="fa fa-angle-right ml-2"></i></a>
+                    {% endif %}
 
                 </div>
             </div>
-        {% endfor %}
+        {% endif %}
+    </div>
+
 {% endblock %}
 
 {% block js %}
