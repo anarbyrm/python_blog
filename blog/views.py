@@ -117,7 +117,10 @@ class TutorialDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(TutorialDetailView, self).get_context_data(**kwargs)
         context['tutorial'] = self.get_object()
-        context['lessons'] = self.get_object().lessons.all()
+
+        user_ip = get_client_ip(self.request)
+        context['user_ip'] = str(user_ip)
+
         return context
 
 

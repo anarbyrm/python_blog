@@ -4,7 +4,7 @@
 {% block content %}
 
     <!-- Blog Detail Start -->
-    <div class="container py-5 px-2 bg-white">
+    <div class="container col-10 py-5 px-2 bg-white">
         <div class="row px-4">
             <div class="col-12">
                 <h2 class="mb-3 font-weight-bold">{{ tutorial.name }}</h2>
@@ -20,9 +20,17 @@
                 <h3>Dərslər</h3>
                 <hr>
                 {% for lesson in tutorial.lessons.all %}
-                    <div>
-                        <a href="{% url 'lesson-detail-page' slug=lesson.slug %}" class="btn btn-sm btn-outline-primary mb-1">{{ forloop.counter }} - {{ lesson.title }}</a>
-                    </div>
+                    {% for view in lesson.views.all %}
+                        {% if user_ip == view.address %}
+                            <div>
+                                <a href="{% url 'lesson-detail-page' slug=lesson.slug %}" class="btn btn-sm btn-outline-primary mb-1">{{ forloop.counter }} - {{ lesson.title }}</a><em>  (oxundu)<em>
+                            </div>
+                        {% else %}
+                            <div>
+                                <a href="{% url 'lesson-detail-page' slug=lesson.slug %}" class="btn btn-sm btn-outline-primary mb-1">{{ forloop.counter }} - {{ lesson.title }}</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
             </div>
         </div>

@@ -8,7 +8,7 @@
                 {% for tutorial in tutorials %}
                     {% if tutorial.is_active %}
                         <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
-                            <img class="w-100" src="{% if tutorial.photo %}{{ tutorial.photo.url }}{% endif %}" alt="Image" height="400">
+                            <img class="w-100" src="{% if tutorial.photo %}{{ tutorial.photo.url }}{% endif %}" alt="Image" height="500">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <h2 class="mb-3 text-white font-weight-bold">{{ tutorial.name }}</h2>
                                 <div class="d-flex text-white">
