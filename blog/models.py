@@ -1,5 +1,7 @@
 from django.db import models
+
 from ckeditor_uploader.fields import RichTextUploadingField
+import readtime
 
 
 class Tag(models.Model):
@@ -9,7 +11,8 @@ class Tag(models.Model):
         ordering = ['name']
 
     def __str__(self) -> str:
-        return self.name
+        name = str(self.name)
+        return name.lower()
     
 
 class Post(models.Model):
@@ -27,6 +30,10 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    def get_readtime(self):
+        result = readtime.of_text(self.content, wpm=100)
+        return result.text
 
 
 class Tutorial(models.Model):
@@ -60,6 +67,10 @@ class Lesson(models.Model):
 
     def __str__(self) -> str:
         return f"{self.tutorial.name}/lesson: {self.order}"
+
+    def get_readtime(self):
+        result = readtime.of_text(self.content, wpm=100)
+        return result.text
 
 
 class About(models.Model):

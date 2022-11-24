@@ -20,6 +20,7 @@
                 <div class="d-flex">
                     <p class="mr-3 text-muted"><i class="fa fa-calendar-alt"></i> {{ post.created_at.date }}</p>
                     <p class="mr-3 text-muted"><i class="fa fa-eye"></i> {{ view_count }} görülmə</p>
+                    <p class="mr-3 text-muted"><i class="fa fa-clock"></i></i> {{ post.get_readtime }} </p>
                 </div>
                 <p class="post-content" >
                     {{ post.content|safe }}

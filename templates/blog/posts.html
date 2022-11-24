@@ -30,7 +30,7 @@
                 <div class="col-10 center pt-5">
                     <form method="get">
                         <div class='d-flex justify-content-center'>
-                            <input class="form-control mb-5 ml-5 mr-5" placeholder="Axtarmaq istədiyiniz məqaləni və ya dərsi yazın..." name="q"/>
+                            <input class="form-control mb-5 ml-5 mr-5" style="width: 1000px" placeholder="Axtarmaq istədiyiniz məqaləni və ya dərsi yazın..." name="q"/>
                         </div>
                     </form>
                 </div>
@@ -55,11 +55,11 @@
             </div>
                 {% if not forloop.last %}<hr>{% endif %}
         {% empty %}
-            <div class="class="row blog-item px-3 pb-5"">
+            <div class="row blog-item px-3 pb-5">
                 <div>
-                    <div style="font-size: 260px"><i class="fas fa-heart-broken"></i></div>
+                    <div class="pl-5 ml-5" style="font-size: 260px"><i class="fas fa-heart-broken"></i></div>
 
-                    <h4 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">Axtarış nəticə vermədi...</h4>
+                    <h4 class="pl-5 ml-5">Axtarış nəticə vermədi...</h4>
                 </div>
             </div>
         {% endfor %}

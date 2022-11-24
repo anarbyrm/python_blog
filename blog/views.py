@@ -64,9 +64,10 @@ class PostListView(ListView):
             )
 
         if tag is not None:
-            posts = models.Post.objects.filter(tags__name__icontains=tag)
+            posts = models.Post.objects.filter(tags__name__iexact=tag)
 
         return posts
+
 
 class PostDetailView(DetailView):
     model = models.Post
